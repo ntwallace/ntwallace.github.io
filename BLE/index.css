@@ -13,9 +13,6 @@ html {
 
 body {
 	background: #444;
-	text-align: center;
-
-	margin-bottom: 50px;
 
 }
 
@@ -28,7 +25,38 @@ button {
 	cursor: pointer;
 }
 
-.header {
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+footer {
+	 flex-shrink: 0;
+
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+
+	padding-bottom: 2%;
+
+	background-color: #666;
+
+	text-align: center;
+
+    /*opacity: .2;
+	pointer-events: none;*/
+}
+
+main {
+  flex: 1 0 auto;
+
+  /*opacity: .2;
+	pointer-events: none;*/
+}
+
+header {
 	display: flex;
 	justify-content: center;
 
@@ -37,6 +65,10 @@ button {
 
 	margin-top: 2.5%;
 	margin-bottom: 5%;
+}
+
+.under {
+
 }
 
 
@@ -48,13 +80,10 @@ button {
 }
 
 .controls {
-	height: auto !important;
-	min-height: 100%;
 
 	margin: 20px 20px;
 
-	opacity: .2;
-	pointer-events: none;
+
 }
 
 .colors {
@@ -118,9 +147,13 @@ button {
 
 .patterns {
 	margin-top: 10%;
+	margin-bottom: 5%;
 
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
+
+	align-items: center;
+	justify-content: center;
 }
 
 .patterns select{
@@ -132,35 +165,23 @@ button {
 	color: #eee;
 
 	border-radius: .5vh;
+
+
 }
 
 #patternDescription {
 	font-size: 3em;
 	color: #eee;
+
+	text-align: center;
 }
 
 #patternGif {
+	margin-left: auto;
+    margin-right: auto;
 
 }
 
-.bottom {
-
-	margin-bottom: 50px;
-}
-
-.footer {
-	position: fixed;
-	left: 0px;
-    bottom: 0px;
-    width: 100%;
-
-    padding-bottom: 2%;
-
-    background-color: #666;
-
-    opacity: .2;
-	pointer-events: none;
-}
 
 .masterText {
 	display: grid;
@@ -259,8 +280,8 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 
 .swatches {
-	display: inline-block;
-	white-space: nowrap;
+	display: flex;
+	justify-content: center;
 }
 
 #colorView button.color {

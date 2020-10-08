@@ -102,13 +102,7 @@ function onAnimationDropdown(val) {
 	document.getElementById('patternDescription').textContent = description;
  	document.getElementById('patternGif').innerHTML = '<img src=' + gifLink + val + gifFooter + ' alt />';
 
- 	rgbString =  zeroPad(document.getElementById('r-input').value, 3);
- 	rgbString += zeroPad(document.getElementById('g-input').value, 3);
- 	rgbString += zeroPad(document.getElementById('b-input').value, 3);
-
- 	val = zeroPad(val, 2).toString();
-
- 	if(btConnected) bleSetPattern(val, rgbString);
+ 	if(btConnected) bleSetPattern(val);
 }
 
  function onPowerSwitch(power) {
@@ -121,7 +115,7 @@ function onAnimationDropdown(val) {
  		document.getElementById('temperature').style.opacity = .2;
  		document.getElementById('temperature').style.pointerEvents = "none";
 
- 		if(btConnected) bleSetMasterVals('blackout', power);
+ 		if(btConnected) bleSetMasterVals('blackout', 1);
  	} else {
  		// undim settings
  		document.getElementById('controls').style.opacity = 1;
@@ -131,7 +125,7 @@ function onAnimationDropdown(val) {
  		document.getElementById('temperature').style.opacity = 1;
  		document.getElementById('temperature').style.pointerEvents = "auto";
 
- 		if(btConnected) bleSetMasterVals('blackout', power);
+ 		if(btConnected) bleSetMasterVals('blackout', 0);
  	}
  }
 
@@ -166,24 +160,19 @@ const animations = [
 	{'id':0, 'name':'Solid', 'description':'Solid primary color on all LEDs'},
 	{'id':1, 'name':'Blink', 'description':'Blinks between primary and secondary color'},
 	{'id':2, 'name':'Breathe', 'description':'Fades between primary and secondary color'},
-	{'id':3, 'name':'', 'description':''},
-	{'id':4, 'name':'', 'description':''},
-	{'id':5, 'name':'', 'description':''},
-	{'id':6, 'name':'', 'description':''},
-	{'id':7, 'name':'', 'description':''},
-	{'id':8, 'name':'', 'description':''},
-	{'id':9, 'name':'', 'description':''},
-	{'id':10, 'name':'', 'description':''},
-	{'id':11, 'name':'', 'description':''},
-	{'id':12, 'name':'', 'description':''},
-	{'id':13, 'name':'', 'description':''},
-	{'id':14, 'name':'', 'description':''},
-	{'id':15, 'name':'', 'description':''},
-	{'id':16, 'name':'', 'description':''},
-	{'id':17, 'name':'', 'description':''},
-	{'id':18, 'name':'', 'description':''},
-	{'id':19, 'name':'', 'description':''},
-	{'id':20, 'name':'', 'description':''},
+	{'id':3, 'name':'Wipe', 'description':'Switches between primary and secondary, switching LEDs one by one, start to end'},
+	{'id':8, 'name':'Colorloop', 'description':'Cycle all LEDs through the rainbow colors'},
+	{'id':9, 'name':'Rainbow', 'description':'Displays rainbow colors along the whole strip'},
+	{'id':13, 'name':'Theater', 'description':'Pattern of one lit and two unlit LEDs running'},
+	{'id':27, 'name':'Android', 'description':'Section of varying length running'},
+	{'id':41, 'name':'Lighthouse', 'description':'Dot moves from start to end, leaving behing a fading trail'},
+	{'id':66, 'name':'Fire', 'description':'Simulates flickering fire in red and yellow'},
+	{'id':55, 'name':'Tri Wipe', 'description':'Like Wipe but turns LEDs off as "third color"'},
+	{'id':56, 'name':'Tri Fade', 'description':'Fades the whole strip from primary color to secondary color to off'},
+	{'id':79, 'name':'Ripple', 'description':'Effect resembling random water ripples'},
+	{'id':77, 'name':'Meteor', 'description':'Smoothly animated meteor'},
+	{'id':74, 'name':'Colortwinkle', 'description':'LEDs light up randomly in random colors and fade off again'},
+	{'id':63, 'name':'Pride', 'description':'Rainbow cycling with brightness variation'},
 ];
 
 

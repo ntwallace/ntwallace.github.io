@@ -29,8 +29,8 @@ function onDeviceConnected() {
     document.getElementById('connectDiv').style.display='none';
     document.getElementById('connectedText').textContent = 'Connected to Brightly!';
 
-    document.getElementById('controls').style.opacity = 1;
-    document.getElementById('controls').style.pointerEvents = "auto";
+    document.getElementById('main').style.opacity = 1;
+    document.getElementById('main').style.pointerEvents = "auto";
     document.getElementById('footer').style.opacity = 1;
     document.getElementById('footer').style.pointerEvents = "auto";
 
@@ -82,14 +82,14 @@ async function bleSetRgbVals(rgbString) {
         const characteristic = await service.getCharacteristic('2392fab3-b378-4d6e-a295-4e37a5e7e1ec');
 
         console.log('Writing RGB value: ' + rgbString);
-        const value  = await characteristic.writeValue(rgbString);
+        const value  = await characteristic.writeValue(encoder.encode(rgbString));
 
     } catch(error) {
         console.log('Error writing RGB values. Error: ' + error);
   }
 }
 
-async function bleSetPattern(patternString, rgbString) {
+async function bleSetPattern(pattern) {
     try {
         console.log('Getting Pattern Service...');
         const service = await server.getPrimaryService(patternService);
@@ -97,9 +97,8 @@ async function bleSetPattern(patternString, rgbString) {
         console.log('Connecting to Pattern RGB characteristic');
         const characteristic = await service.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1eb');
 
-        console.log('Writing Pattern ' + patternString + ', RGB value: ' + rgbString);
-        val = patternString + rgbString;
-        const value  = await characteristic.writeValue(val);
+        console.log('Writing Pattern ' + pattern);
+        const value  = await characteristic.writeValue(encoder.encode(pattern));
 
     } catch(error) {
         console.log('Error writing RGB values. Error: ' + error);
