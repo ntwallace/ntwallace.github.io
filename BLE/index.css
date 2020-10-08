@@ -45,15 +45,15 @@ footer {
 
 	text-align: center;
 
-    /*opacity: .2;
-	pointer-events: none;*/
+    opacity: .2;
+	pointer-events: none;
 }
 
 main {
   flex: 1 0 auto;
 
-  /*opacity: .2;
-	pointer-events: none;*/
+  opacity: .2;
+	pointer-events: none;
 }
 
 header {
