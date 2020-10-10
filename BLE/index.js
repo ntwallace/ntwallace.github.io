@@ -1,9 +1,11 @@
 var colorPicker = new iro.ColorPicker("#picker", {
-  width: 300,
+  width: 250,
   color: "#fff",
   borderWidth: 2,
   borderColor: "#888"
 });
+
+let colorSlot = 0;
 
 const hexToRgb = hex =>
   hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
@@ -18,8 +20,23 @@ colorPicker.on(['color:change'], function(color) {
 
   	// pass to BLE
  	rgbString = getRgbString(rgbArray);
- 	if(btConnected)  bleSetRgbVals(rgbString);
+ 	if(btConnected)  bleSetRgbVals(rgbString, colorSlot);
 });
+
+function onColorSlot(e) {
+	e.style.background = '#eee';
+	e.style.color = '#666';
+
+	if(e.id == 'secondaryColor') {
+		colorSlot = 1;
+		document.getElementById('primaryColor').style.background = '#666';
+		document.getElementById('primaryColor').style.color = '#eee';
+	} else {
+		colorSlot = 0;
+		document.getElementById('secondaryColor').style.background = '#666';
+		document.getElementById('secondaryColor').style.color = '#eee';
+	}
+}
 
 function setColorPicker(rgbArray) {
 	rgbString = "rgb(";
@@ -43,7 +60,7 @@ function setColorPicker(rgbArray) {
 
  	// pass to BLE
  	rgbString = getRgbString(rgbColor);
- 	if(btConnected)  bleSetRgbVals(rgbString);
+ 	if(btConnected)  bleSetRgbVals(rgbString, colorSlot);
  }
 
  function onRgbValChange(e) {
@@ -72,7 +89,7 @@ function setColorPicker(rgbArray) {
 
  	// pass to BLE
  	rgbString = getRgbString(rgbArray);
- 	if(btConnected)  bleSetRgbVals(rgbString);
+ 	if(btConnected)  bleSetRgbVals(rgbString, colorSlot);
  }
 
  function setRgbInputs(rgbArray) {

@@ -73,7 +73,7 @@ async function bleSetMasterVals(type, val) {
   }
 }
 
-async function bleSetRgbVals(rgbString) {
+async function bleSetRgbVals(rgbString, colorSlot) {
     try {
         console.log('Getting RGB Service...');
         const service = await server.getPrimaryService(rgbService);
@@ -81,8 +81,10 @@ async function bleSetRgbVals(rgbString) {
         console.log('Connecting to RGB characteristic');
         const characteristic = await service.getCharacteristic('2392fab3-b378-4d6e-a295-4e37a5e7e1ec');
 
-        console.log('Writing RGB value: ' + rgbString);
-        const value  = await characteristic.writeValue(encoder.encode(rgbString));
+        console.log('Writing RGB value: ' + rgbString + ' to slot: ' + colorSlot);
+        val = colorSlot.toString() + rgbString;
+
+        const value  = await characteristic.writeValue(encoder.encode(val));
 
     } catch(error) {
         console.log('Error writing RGB values. Error: ' + error);

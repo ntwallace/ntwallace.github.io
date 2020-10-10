@@ -24,6 +24,14 @@
 					<div class='colors'>
 						<div class='colorPicker'>
 							<div id="picker"></div>
+							<div id='colorSlot' class='colorSlot'>
+								<div id='slot1' class='colorSlotButton'>
+									<button id='primaryColor' onclick='onColorSlot(this)'>Primary</button>
+								</div>
+								<div id='slot2' class='colorSlotButton'>
+									<button id='secondaryColor' onclick='onColorSlot(this)'>Secondary</button>
+								</div>
+							</div>
 						</div>
 
 						<div id='colorView' class='colorView'>
@@ -42,7 +50,7 @@
 									<button class='color pink' data-value='#FF1493' onclick='onColorButtonClick(this)'></button>
 								</div>
 								<div class='swatches bottom'>
-									<button class='color turqouise' data-value='#48D1CC' onclick='onColorButtonClick(this)'></button>
+									<button class='color black' data-value='#000' onclick='onColorButtonClick(this)'></button>
 									<button class='color seaGreen' data-value='#20B2AA' onclick='onColorButtonClick(this)'></button>
 									<button class='color skyBlue' data-value='#87CEFA' onclick='onColorButtonClick(this)'></button>
 									<button class='color lightSlate' data-value='#778899' onclick='onColorButtonClick(this)'></button>
@@ -85,11 +93,11 @@
 					<div id='blackoutText'>Power</div>
 					<div class='masterTextContainer'>
 						<div id='brightnessText'>Brightness</div>
-						<div id='brightnessPct'>(50%)</div>
+						<div id='brightnessPct'>(13%)</div>
 					</div>
 					<div class='masterTextContainer'>
 						<div id='temperatureText'>Temperature</div>
-						<div id='temperatureK'>(5000K)</div>
+						<div id='temperatureK'>(4250K)</div>
 					</div>
 				</div>
 
@@ -107,7 +115,7 @@
 					</div>
 
 					<div class ='slider' id='temperature'> 
-						<input type="range" min="2500" max="10000" value="4500" class="slider" id="temperatureSlider" oninput='onTemperatureSlider(this.value)'>
+						<input type="range" min="2500" max="10000" value="4250" class="slider" id="temperatureSlider" oninput='onTemperatureSlider(this.value)'>
 					</div>
 				</div>
 			</footer>
