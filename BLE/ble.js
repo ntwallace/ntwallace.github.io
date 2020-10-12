@@ -15,6 +15,7 @@ async function onBleConnect() {
                                 rgbService,
                                 patternService]
         });
+        device.addEventListener('gattserverdisconnected', onDeviceDisconnected);
 
         console.log('Connecting to Brightly device...');
         server = await device.gatt.connect();
@@ -26,6 +27,7 @@ async function onBleConnect() {
 }
 
 function onDeviceConnected() {
+	console.log('Device connected');
     document.getElementById('connectDiv').style.display='none';
     document.getElementById('connectedText').textContent = 'Connected to Brightly!';
 
@@ -35,6 +37,19 @@ function onDeviceConnected() {
     document.getElementById('footer').style.pointerEvents = "auto";
 
     btConnected = true;
+}
+
+function onDeviceDisconnected(){
+	console.log('Device disconnected');
+	document.getElementById('connectDiv').style.display='flex';
+    document.getElementById('connectedText').textContent = 'Not connected';
+
+    document.getElementById('main').style.opacity = .2;
+    document.getElementById('main').style.pointerEvents = "none";
+    document.getElementById('footer').style.opacity = .2;
+    document.getElementById('footer').style.pointerEvents = "none";
+
+    btConnected = false;
 }
 
 async function bleSetMasterVals(type, val) {
