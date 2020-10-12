@@ -58,9 +58,7 @@ function setColorPicker(rgbArray) {
  	setRgbInputs(rgbColor);
  	setColorPicker(rgbColor);
 
- 	// pass to BLE
- 	rgbString = getRgbString(rgbColor);
- 	if(btConnected)  bleSetRgbVals(rgbString, colorSlot);
+ 	// pass to BLE happens in setColorPicker
  }
 
  function onRgbValChange(e) {
@@ -89,6 +87,7 @@ function setColorPicker(rgbArray) {
 
  	// pass to BLE
  	rgbString = getRgbString(rgbArray);
+ 	console.log("Here in RGB input");
  	if(btConnected)  bleSetRgbVals(rgbString, colorSlot);
  }
 
