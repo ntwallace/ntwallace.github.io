@@ -41,6 +41,8 @@ function onDeviceConnected() {
 
 function onDeviceDisconnected(){
 	console.log('Device disconnected');
+	resetPage();
+
 	document.getElementById('connectDiv').style.display='flex';
     document.getElementById('connectedText').textContent = 'Not connected';
 
@@ -50,6 +52,14 @@ function onDeviceDisconnected(){
     document.getElementById('footer').style.pointerEvents = "none";
 
     btConnected = false;
+}
+
+function resetPage(){
+	rgbArray = [255, 0, 0];
+	setRgbInputs(rgbArray);
+	setColorPicker(rgbArray);
+
+	document.getElementById('animationDropdown').value = 0;
 }
 
 async function bleSetMasterVals(type, val) {
