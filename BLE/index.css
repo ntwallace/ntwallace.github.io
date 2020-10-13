@@ -5,7 +5,10 @@
 	--settings-height: 25vh;
 }
 
-
+html, body {
+	padding: 0 !important;
+	margin: 0 !important;
+}
 
 html {
 	font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
@@ -31,14 +34,8 @@ body {
 }
 
 footer {
-	flex-shrink: 0;
 
-	left: 0;
-	bottom: 0;
-	right: 0;
-	width: 100%;
-
-	padding-bottom: 2%;
+	padding-bottom: 2vh;
 
 	background-color: #666;
 
@@ -55,6 +52,11 @@ main {
   pointer-events: none;
 }
 
+h1 {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
 header {
 	display: flex;
 	justify-content: center;
@@ -62,8 +64,7 @@ header {
 	font-size: 6em;
 	color: #eee;
 
-	margin-top: 2.5%;
-	margin-bottom: 5%;
+	margin-top: 2.5vh;
 }
 
 .under {
@@ -185,8 +186,8 @@ header {
 }
 
 .patterns {
-	margin-top: 10%;
-	margin-bottom: 5%;
+	margin-top: 6vh;
+	margin-bottom: 5vh;
 
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -229,8 +230,8 @@ header {
     font-size: 3em;
     color: white;
 
-    padding-bottom: 3%;
-    padding-top: 2.5%;
+    padding-bottom: 3vh;
+    padding-top: 3vh;
 }
 
 

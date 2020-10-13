@@ -2,7 +2,14 @@
     font-size: 0.5em;
 }
 
+* {
+	font-family: 'Noto Sans', sans-serif !important;
+}
 
+.tagline {
+	transform: translateY(-20px) translateX(7px);
+	font-size: 12pt;
+}
 
 /* Connect */
 

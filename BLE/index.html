@@ -3,20 +3,24 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Brightly - LED Controller</title>
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="index.css">
 		<link rel="stylesheet" href="common.css">
-		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
 		<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 		<script src='index.js'></script>
 		<script src='ble.js'></script>
 	</head>
+
 	<body>
 		<div class='container'>
 			<header class='header'>
-				<h1>Brightly</h1>
+				<span>
+					<h1>
+						brightly
+						<div class="tagline">by Polytronic</div>
+					</h1>
+				</span>
 				<div id='connectedText'>not connected</div>
 			</header>
 			<main class='content' id='main'>
@@ -75,10 +79,12 @@
 					</div>
 					<div class='patterns'>
 						<div id='patternDropdown'>
-							<select id='animationDropdown' onchange='onAnimationDropdown(this.value)'></select>
-							<script>
+							<center>
+								<select id='animationDropdown' onchange='onAnimationDropdown(this.value)'></select>
+								<script>
 								animations.forEach(e => animationDropdown.innerHTML += `<option value=${e.id}>${e.name}</option>`);
 							</script>
+								</center>
 						</div>
 						<div id='patternDescription'>Solid primary color on all LEDs</div>
 						<div id='patternGif'>
