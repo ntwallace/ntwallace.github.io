@@ -121,6 +121,12 @@ function onAnimationDropdown(val) {
  	if(btConnected) bleSetPattern(val);
 }
 
+function onPatternSlider(val) {
+	console.log('Setting pattern speed to ' + val + '%');
+
+	if(btConnected) bleSetPatternSpeed(val);
+}
+
  function onPowerSwitch(power) {
  	if(!power){  // blackout
  		// dim settings

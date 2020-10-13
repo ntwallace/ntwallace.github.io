@@ -81,7 +81,12 @@
 							</script>
 						</div>
 						<div id='patternDescription'>Solid primary color on all LEDs</div>
-						<div id='patternGif'><img src='https://github.com/photocromax/WLED-live-visualizations/raw/master/GIF/FX_0.gif' /></div>
+						<div id='patternGif'>
+							<img src='https://github.com/photocromax/WLED-live-visualizations/raw/master/GIF/FX_0.gif' />
+						</div>
+						<div class ='slider' id='temperature'> 
+							<input type="range" min="1" max="100" value="50" class="slider" id="patternSlider" oninput='onPatternSlider(this.value)'>
+						</div>
 					</div>
 					<div class='bottom'></div>
 				</div>
