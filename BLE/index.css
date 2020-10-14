@@ -222,6 +222,28 @@ header {
 
 }
 
+#patternSpeedDiv {
+	   font-size: 2em;
+    color: white;
+
+    padding-bottom: 3vh;
+    padding-top: 3vh;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#patternIntensityDiv {
+	   font-size: 2em;
+    color: white;
+
+    padding-bottom: 3vh;
+    padding-top: 3vh;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 .masterText {
 	display: grid;

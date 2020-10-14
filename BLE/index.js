@@ -116,15 +116,19 @@ function onAnimationDropdown(val) {
 	let description = animations.find(o => o.id == val).description;
 
 	document.getElementById('patternDescription').textContent = description;
- 	document.getElementById('patternGif').innerHTML = '<img src=' + gifLink + val + gifFooter + ' alt />';
+ 	//document.getElementById('patternGif').innerHTML = '<img src=' + gifLink + val + gifFooter + ' alt />';
 
  	if(btConnected) bleSetPattern(val);
 }
 
-function onPatternSlider(val) {
-	console.log('Setting pattern speed to ' + val + '%');
+function onPatternSlider() {
+	e = document.getElementById('animationDropdown');
+	pattern = e.options[e.selectedIndex].value;
+	speed = document.getElementById('patternSpeed').value;
+	intensity =  document.getElementById('patternIntensity').value;
+	console.log('Setting pattern ' + pattern + ' speed to ' + speed + '% and intensity to ' + intensity + '%');
 
-	if(btConnected) bleSetPatternSpeed(val);
+	if(btConnected) bleSetPatternConfig(pattern, speed, intensity);
 }
 
  function onPowerSwitch(power) {
@@ -180,6 +184,7 @@ const gifFooter = '.gif';
 
 const animations = [
 	{'id':0, 'name':'Solid', 'description':'Solid primary color on all LEDs'},
+	{'id':1, 'name':'Blink', 'description':'Blinks between primary and secondary color'},
 	{'id':15, 'name':'Breathe', 'description':'Fades between primary and secondary color'},
 	{'id':3, 'name':'Wipe', 'description':'Switches between primary and secondary, switching LEDs one by one, start to end'},
 	{'id':87, 'name':'Rainbow', 'description':'Rainbow animation moving down the strip'},

@@ -21,7 +21,7 @@
 						<div class="tagline">by Polytronic</div>
 					</h1>
 				</span>
-				<div id='connectedText'>not connected</div>
+				<!-- <div id='connectedText'>not connected</div> -->
 			</header>
 			<main class='content' id='main'>
 				<div class ='controls' id='controls'>
@@ -87,11 +87,11 @@
 								</center>
 						</div>
 						<div id='patternDescription'>Solid primary color on all LEDs</div>
-						<div id='patternGif'>
-							<img src='https://github.com/photocromax/WLED-live-visualizations/raw/master/GIF/FX_0.gif' />
+						<div class ='slider' id='patternSpeedDiv'> Speed: 
+							<input type="range" min="1" max="99" value="50" class="slider" id="patternSpeed" oninput='onPatternSlider()'>
 						</div>
-						<div class ='slider' id='temperature'> 
-							<input type="range" min="1" max="100" value="50" class="slider" id="patternSlider" oninput='onPatternSlider(this.value)'>
+						<div class ='slider' id='patternIntensityDiv'> Effect: 
+							<input type="range" min="1" max="99" value="50" class="slider" id="patternIntensity" oninput='onPatternSlider()'>
 						</div>
 					</div>
 					<div class='bottom'></div>

@@ -42,7 +42,7 @@ async function onBleConnect() {
 function onDeviceConnected() {
 	console.log('Device connected');
     document.getElementById('connectDiv').style.display='none';
-    document.getElementById('connectedText').textContent = 'Connected to Brightly!';
+    //document.getElementById('connectedText').textContent = 'Connected to Brightly!';
 
     document.getElementById('main').style.opacity = 1;
     document.getElementById('main').style.pointerEvents = "auto";
@@ -57,7 +57,7 @@ function onDeviceDisconnected(){
 	resetPage();
 
 	document.getElementById('connectDiv').style.display='flex';
-    document.getElementById('connectedText').textContent = 'Not connected';
+    //document.getElementById('connectedText').textContent = 'Not connected';
 
     document.getElementById('main').style.opacity = .2;
     document.getElementById('main').style.pointerEvents = "none";
@@ -145,18 +145,23 @@ async function bleSetPattern(pattern) {
   }
 }
 
-async function bleSetPatternSpeed(speed) {
+async function bleSetPatternConfig(pattern, speed, intensity) {
     try {
-        // console.log('Getting Pattern Service...');
-        // const service = await server.getPrimaryService(patternService);
 
-        console.log('Connecting to Pattern Speed characteristic');
-        const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1ea');
+        if(pattern.toString().length < 2) {
+            val = encoder.encode('0' + pattern.toString() + speed.toString() + intensity.toString() + '00');
+        } else {
+            val = encoder.encode(pattern.toString() + speed.toString() + intensity.toString() + '00');
+        }
+        console.log('Pattern config string set to ' + val);
 
-        console.log('Writing Speed ' + speed + '%');
-        const value  = await characteristic.writeValue(encoder.encode(speed));
+        console.log('Connecting to Pattern config characteristic');
+        const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1ec');
+
+        //console.log('Writing Speed ' + speed + '%');
+        const value  = await characteristic.writeValue(val);
 
     } catch(error) {
-        console.log('Error writing pattern speed values. Error: ' + error);
+        console.log('Error writing pattern config values. Error: ' + error);
   }
 }
