@@ -180,21 +180,20 @@ const gifFooter = '.gif';
 
 const animations = [
 	{'id':0, 'name':'Solid', 'description':'Solid primary color on all LEDs'},
-	{'id':1, 'name':'Blink', 'description':'Blinks between primary and secondary color'},
-	{'id':2, 'name':'Breathe', 'description':'Fades between primary and secondary color'},
+	{'id':15, 'name':'Breathe', 'description':'Fades between primary and secondary color'},
 	{'id':3, 'name':'Wipe', 'description':'Switches between primary and secondary, switching LEDs one by one, start to end'},
-	{'id':8, 'name':'Colorloop', 'description':'Cycle all LEDs through the rainbow colors'},
-	{'id':9, 'name':'Rainbow', 'description':'Displays rainbow colors along the whole strip'},
+	{'id':87, 'name':'Rainbow', 'description':'Rainbow animation moving down the strip'},
+	{'id':9, 'name':'Rainbow Wave', 'description':'Rainbow wave along the whole strip'},
+	{'id':63, 'name':'Rainbow Sparkles', 'description':'Rainbow flashes with variable brightness'},
 	{'id':13, 'name':'Theater', 'description':'Pattern of one lit and two unlit LEDs running'},
-	{'id':27, 'name':'Android', 'description':'Section of varying length running'},
-	{'id':41, 'name':'Lighthouse', 'description':'Dot moves from start to end, leaving behing a fading trail'},
-	{'id':66, 'name':'Fire', 'description':'Simulates flickering fire in red and yellow'},
-	{'id':55, 'name':'Tri Wipe', 'description':'Like Wipe but turns LEDs off as "third color"'},
-	{'id':56, 'name':'Tri Fade', 'description':'Fades the whole strip from primary color to secondary color to off'},
-	{'id':79, 'name':'Ripple', 'description':'Effect resembling random water ripples'},
-	{'id':77, 'name':'Meteor', 'description':'Smoothly animated meteor'},
-	{'id':74, 'name':'Colortwinkle', 'description':'LEDs light up randomly in random colors and fade off again'},
-	{'id':63, 'name':'Pride', 'description':'Rainbow cycling with brightness variation'},
+	{'id':28, 'name':'Chase', 'description':'2 LEDs in primary color running on secondary'},
+	//{'id':46, 'name':'Gradient', 'description':'Moves a saturation gradient of the primary color along the strip'},
+	//{'id':78, 'name':'Railway', 'description':'Shows primary and secondary color on alternating LEDs. All LEDs fade to their opposite color and back again'},
+
+	//{'id':88, 'name':'Candle', 'description':'Flicker resembling a candle flame'},
+	{'id':89, 'name':'Fireworks', 'description':'Exploding multicolor fireworks'},
+	{'id':93, 'name':'Running Trail', 'description':'Moving dots with trail'},
+	
 ];
 
 
