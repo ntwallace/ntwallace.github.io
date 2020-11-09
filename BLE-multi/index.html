@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Brightly - LED Controller</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="index.css">
+		<link rel="stylesheet" href="common.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+		<script src='index.js'></script>
+		<script src='ble.js'></script>
+	</head>
+
+	<body>
+		<div class='container'>
+			<header class='header'>
+				<span class='settings'>
+					<div id='modeDiv'>Mode: 
+						<select id='modeSelect' onchange='onModeSelect(this.value)'>
+							<option value=0>Network</option>
+							<option value=1>Pattern</option>
+							<option value=2>Player</option>			
+						</select>
+					</div>
+					<div id='outputDiv'>Output: 
+						<select id='outputSelect' onchange='onOutputSelect(this.value)'>
+							<option value=0>All</option>
+							<option value=1>1</option>
+							<option value=2>2</option>
+							<option value=3>3</option>
+							<option value=4>4</option>
+							<option value=5>5</option>
+							<option value=6>6</option>
+							<option value=7>7</option>						
+							<option value=8>8</option>						
+						</select>
+					</div>
+				</span>
+				<span>
+					<h1>
+						brightly
+						<div class="tagline">by Polytronic</div>
+					</h1>
+				</span>
+				<span></span>
+				<!-- <div id='connectedText'>not connected</div> -->
+				
+			</header>
+			<main class='content' id='main'>
+				<div class ='controls' id='controls'>
+					<div class='colors'>
+						<div class='colorPicker'>
+							<div id="picker"></div>
+							<div id='colorSlot' class='colorSlot'>
+								<div id='slot1' class='colorSlotButton'>
+									<button id='primaryColor' onclick='onColorSlot(this)'>Primary</button>
+								</div>
+								<div id='slot2' class='colorSlotButton'>
+									<button id='secondaryColor' onclick='onColorSlot(this)'>Secondary</button>
+								</div>
+							</div>
+						</div>
+
+						<div id='colorView' class='colorView'>
+								<div class='swatches top'>
+									<button class='color white' data-value='#ffffff' onclick='onColorButtonClick(this)'></button>
+									<button class='color red' data-value='#ff0000' onclick='onColorButtonClick(this)'></button>
+									<button class='color green' data-value='#00ff00' onclick='onColorButtonClick(this)'></button>
+									<button class='color blue' data-value='#0000ff' onclick='onColorButtonClick(this)'></button>
+									<button class='color yellow' data-value='#ffff00' onclick='onColorButtonClick(this)'></button>
+								</div>
+								<div class='swatches middle'>
+									<button class='color cyan' data-value='#00ffff' onclick='onColorButtonClick(this)'></button>
+									<button class='color magenta' data-value='#ff00ff' onclick='onColorButtonClick(this)'></button>
+									<button class='color purple' data-value='#400080' onclick='onColorButtonClick(this)'></button>
+									<button class='color orange' data-value='#FF3000' onclick='onColorButtonClick(this)'></button>
+									<button class='color pink' data-value='#FF1493' onclick='onColorButtonClick(this)'></button>
+								</div>
+								<div class='swatches bottom'>
+									<button class='color black' data-value='#000' onclick='onColorButtonClick(this)'></button>
+									<button class='color seaGreen' data-value='#20B2AA' onclick='onColorButtonClick(this)'></button>
+									<button class='color skyBlue' data-value='#87CEFA' onclick='onColorButtonClick(this)'></button>
+									<button class='color lightSlate' data-value='#778899' onclick='onColorButtonClick(this)'></button>
+									<button class='color peach' data-value='#FFDAB9' onclick='onColorButtonClick(this)'></button>
+								</div>
+
+								<div class='rgbContainer'>
+									<div class='rgbVals'>
+										<div id='rgbText' class='rgbInput'>RGB</div>
+										<div id='rgb-r' class='rgbInput'>
+											<input type='text' id='r-input' maxlength='3' size='2' value='255' oninput='onRgbValChange(this)'>
+										</div>
+										<div id='rgb-g' class='rgbInput'>
+											<input type='text' id='g-input' maxlength='3' size='2' value='255' oninput='onRgbValChange(this)'>
+										</div>
+										<div id='rgb-b' class='rgbInput'>
+											<input type='text' id='b-input' maxlength='3' size='2' value='255' oninput='onRgbValChange(this)'>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+					<div class='patterns'>
+						<div id='patternDropdown'>
+							<center>
+								<select id='animationDropdown' onchange='onAnimationDropdown(this.value)'></select>
+								<script>
+								animations.forEach(e => animationDropdown.innerHTML += `<option value=${e.id}>${e.name}</option>`);
+							</script>
+								</center>
+						</div>
+						<div id='patternDescription'>Solid primary color on all LEDs</div>
+						<div class ='slider' id='patternSpeedDiv'> Speed: 
+							<input type="range" min="1" max="99" value="50" class="slider" id="patternSpeed" oninput='onPatternSlider()'>
+						</div>
+						<div class ='slider' id='patternIntensityDiv'> Effect: 
+							<input type="range" min="1" max="99" value="50" class="slider" id="patternIntensity" oninput='onPatternSlider()'>
+						</div>
+					</div>
+					<div class='bottom'></div>
+				</div>
+				<div class='under' id='under'>
+				</div>
+			</main>
+			<footer class='footer' id='footer'>
+				<div class='masterText'>
+					<div id='blackoutText'>Power</div>
+					<div class='masterTextContainer'>
+						<div id='brightnessText'>Brightness</div>
+						<div id='brightnessPct'>(13%)</div>
+					</div>
+					<div class='masterTextContainer'>
+						<div id='temperatureText'>Temperature</div>
+						<div id='temperatureK'>(4250K)</div>
+					</div>
+				</div>
+
+				<div class='master'>
+					<div class='switch' id='blackout'>
+						<label class="switch">
+						  <input type="checkbox" checked id='checkboxBlackout' onchange='onPowerSwitch(this.checked)'>
+						  <span class="slider" id='sliderBlackout'></span>
+						</label>
+						<br />
+					</div>
+
+					<div class ='slider' id='brightness'>
+						<input type="range" min="1" max="100" value="13" class="slider" id="brightnessSlider" oninput='onBrightnessSlider(this.value)'>
+					</div>
+
+					<div class ='slider' id='temperature'> 
+						<input type="range" min="2500" max="10000" value="4250" class="slider" id="temperatureSlider" oninput='onTemperatureSlider(this.value)'>
+					</div>
+				</div>
+			</footer>
+			<div class='connect' id='connectDiv'>
+				<h1>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 136"><path d="M55.48,33.58,66.69,44.82,55.49,56.06V33.58Zm0,68.83L66.69,91.17,55.49,79.93v22.48ZM43.51,68,19.28,43.63l7-7.05L45.61,56V9.53l35.1,35.21L57.53,68,80.72,91.25,45.61,126.47V80L26.3,99.42l-7-7L43.51,68ZM50,136c29.6,0,50-14.11,50-68S79.6,0,50,0,0,14.11,0,68s20.4,68,50,68Z"/></svg>
+					&nbsp; Brightly
+				</h1>
+				<p>
+					To use this demo, connect to a Brightly device!
+				</p>
+
+				<button id='connect' onclick='onBleConnect()'>Connect</button>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,11 +1,13 @@
 var colorPicker = new iro.ColorPicker("#picker", {
   width: 250,
-  color: "#fff",
+  color: "#FF0000",
   borderWidth: 2,
   borderColor: "#888"
 });
 
 let colorSlot = 0;
+let lastPrimaryColor = '#FF0000';
+let lastSecondaryColor = '#000';
 
 const hexToRgb = hex =>
   hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
@@ -28,10 +30,16 @@ function onColorSlot(e) {
 	e.style.color = '#666';
 
 	if(e.id == 'secondaryColor') {
+		lastPrimaryColor = colorPicker.color.hexString;
+		colorPicker.color.hexString = lastSecondaryColor;
+		
 		colorSlot = 1;
 		document.getElementById('primaryColor').style.background = '#666';
 		document.getElementById('primaryColor').style.color = '#eee';
 	} else {
+		lastSecondaryColor = colorPicker.color.hexString;
+		colorPicker.color.hexString = lastPrimaryColor;
+
 		colorSlot = 0;
 		document.getElementById('secondaryColor').style.background = '#666';
 		document.getElementById('secondaryColor').style.color = '#eee';
@@ -104,7 +112,6 @@ function setColorPicker(rgbArray) {
 
  function getRgbString(rgbArray) {
 
-
  	rgbString =  zeroPad(rgbArray[0],3).toString();
  	rgbString += zeroPad(rgbArray[1],3).toString();
  	rgbString += zeroPad(rgbArray[2],3).toString();
@@ -114,21 +121,25 @@ function setColorPicker(rgbArray) {
 
 function onAnimationDropdown(val) {
 	let description = animations.find(o => o.id == val).description;
-
 	document.getElementById('patternDescription').textContent = description;
  	//document.getElementById('patternGif').innerHTML = '<img src=' + gifLink + val + gifFooter + ' alt />';
 
- 	if(btConnected) bleSetPattern(val);
+ 	output = document.getElementById('outputSelect').value;
+
+ 	if(btConnected) bleSetPattern(val, output);
 }
 
 function onPatternSlider() {
-	e = document.getElementById('animationDropdown');
-	pattern = e.options[e.selectedIndex].value;
+	pattern = document.getElementById('animationDropdown').selectedIndex;
+	output = document.getElementById('outputSelect').value;
+	//output = e.options[e.selectedIndex].value;
+
 	speed = document.getElementById('patternSpeed').value;
 	intensity =  document.getElementById('patternIntensity').value;
-	console.log('Setting pattern ' + pattern + ' speed to ' + speed + '% and intensity to ' + intensity + '%');
+	
+	console.log('Setting output ' + output + ' pattern ' + pattern + ' speed to ' + speed + '% and intensity to ' + intensity + '%');
 
-	if(btConnected) bleSetPatternConfig(pattern, speed, intensity);
+	if(btConnected) bleSetPatternConfig(pattern, speed, intensity, output);
 }
 
  function onPowerSwitch(power) {
@@ -166,6 +177,14 @@ function onPatternSlider() {
 
  	if(btConnected) bleSetMasterVals('temperature', val);
  }
+
+function onModeSelect(val) {
+	if(btConnected) bleSetOpMode(val);
+}
+
+function onOutputSelect(val) {
+	console.log(val);
+}
 
 
 function zeroPad(num, numZeros) {
