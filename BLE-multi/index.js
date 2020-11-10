@@ -225,6 +225,8 @@ function onOutputSelect(val) {
 
 	if(val == 0) val += 1;
 
+	if(btConnected) bleSetOutput(val);
+
 	if(colorSlot == 0) {
 		colorPicker.color.hexString = lastPrimaryColor[val - 1];
 	} else {

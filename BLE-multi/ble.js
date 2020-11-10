@@ -118,6 +118,21 @@ async function bleSetOpMode(opMode) {
   }
 }
 
+async function bleSetOutput(output) {
+    try {
+
+        console.log('Connecting to output characteristic');
+        const characteristic = await settingsService.getCharacteristic('7537fbd5-d66c-4b03-b132-47b1e18281eb');
+
+        console.log('Setting output to: ' + output);
+
+        const value  = await characteristic.writeValue(encoder.encode(output));
+
+    } catch(error) {
+        console.log('Error setting Op Mode. Error: ' + error);
+  }
+}
+
 async function bleSetMasterVals(type, val) {
     try {
         // console.log('Getting Master LED Service...');
