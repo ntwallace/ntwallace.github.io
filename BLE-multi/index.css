@@ -140,13 +140,13 @@ header {
 }
 
 #primaryColor{
-	color: #666;
-	background: #eee;
+	color: rgb(102, 102, 102);
+	background: rgb(238, 238, 238);
 }
 
 #secondaryColor{
-	color: #eee;
-	background: #666;
+	color: rgb(238, 238, 238);
+	background: rgb(102, 102, 102);
 }
 
 #slot1 {

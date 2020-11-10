@@ -6,8 +6,12 @@ var colorPicker = new iro.ColorPicker("#picker", {
 });
 
 let colorSlot = 0;
-let lastPrimaryColor = '#FF0000';
-let lastSecondaryColor = '#000';
+const primaryColor = '#FF0000';
+const secondaryColor = '#FFF';
+let changeColor = true;
+
+let lastPrimaryColor = [primaryColor, primaryColor, primaryColor, primaryColor, primaryColor, primaryColor, primaryColor, primaryColor];
+let lastSecondaryColor = [secondaryColor, secondaryColor, secondaryColor, secondaryColor, secondaryColor, secondaryColor, secondaryColor, secondaryColor];
 
 const hexToRgb = hex =>
   hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
@@ -20,29 +24,62 @@ colorPicker.on(['color:change'], function(color) {
   rgbArray = Object.values(color.rgb);
   setRgbInputs(rgbArray);
 
+  output = document.getElementById('outputSelect').value;
+  saveColorVals();
+
   	// pass to BLE
- 	rgbString = getRgbString(rgbArray);
- 	if(btConnected)  bleSetRgbVals(rgbString, colorSlot);
+ 	if(changeColor) {
+ 		rgbString = getRgbString(rgbArray);
+ 		if(btConnected)  bleSetRgbVals(rgbString, colorSlot, output);
+ 	} else {
+ 		changeColor = true;
+ 	}
 });
 
 function onColorSlot(e) {
 	e.style.background = '#eee';
 	e.style.color = '#666';
+	changeColor = false;
+	
+	let allOutputs = false;
+	let output = document.getElementById('outputSelect').value;
+
+	if(output == 0)	allOutputs = true;
 
 	if(e.id == 'secondaryColor') {
-		lastPrimaryColor = colorPicker.color.hexString;
-		colorPicker.color.hexString = lastSecondaryColor;
-		
 		colorSlot = 1;
+		if(!allOutputs) {
+			lastPrimaryColor[output - 1] = colorPicker.color.hexString;
+			colorPicker.color.hexString = lastSecondaryColor[output - 1];
+		} else {
+			colorPicker.color.hexString = lastSecondaryColor[0];
+		}
 		document.getElementById('primaryColor').style.background = '#666';
 		document.getElementById('primaryColor').style.color = '#eee';
 	} else {
-		lastSecondaryColor = colorPicker.color.hexString;
-		colorPicker.color.hexString = lastPrimaryColor;
-
 		colorSlot = 0;
+		if(!allOutputs) {
+			lastSecondaryColor[output - 1] = colorPicker.color.hexString;
+			colorPicker.color.hexString = lastPrimaryColor[output - 1];
+		} else {
+			colorPicker.color.hexString = lastPrimaryColor[0];
+		}
 		document.getElementById('secondaryColor').style.background = '#666';
 		document.getElementById('secondaryColor').style.color = '#eee';
+	}
+}
+
+function saveColorVals() {
+	let output = document.getElementById('outputSelect').value;
+	console.log('Saving color values on output ' + output + ', color slot ' + colorSlot);
+	if(output == 0) output += 1;
+
+
+
+	if(colorSlot = 0) {
+		lastPrimaryColor[output - 1] = colorPicker.color.hexString;
+	} else {
+		lastSecondaryColor[output - 1] = colorPicker.color.hexString;
 	}
 }
 
@@ -92,6 +129,7 @@ function setColorPicker(rgbArray) {
  	}
 
  	setColorPicker(rgbArray);
+ 	//saveColorVals();
 
  	// pass to BLE
  	rgbString = getRgbString(rgbArray);
@@ -183,7 +221,16 @@ function onModeSelect(val) {
 }
 
 function onOutputSelect(val) {
-	console.log(val);
+	changeColor = false;
+
+	if(val == 0) val += 1;
+
+	if(colorSlot == 0) {
+		colorPicker.color.hexString = lastPrimaryColor[val - 1];
+	} else {
+		colorPicker.color.hexString = lastSecondaryColor[val - 1];
+	}
+
 }
 
 
@@ -204,7 +251,7 @@ const gifFooter = '.gif';
 const animations = [
 	{'id':0, 'name':'Solid', 'description':'Solid primary color on all LEDs'},
 	{'id':1, 'name':'Blink', 'description':'Blinks between primary and secondary color'},
-	{'id':15, 'name':'Breathe', 'description':'Fades between primary and secondary color'},
+	{'id':12, 'name':'Breathe', 'description':'Fades between primary and secondary color'},
 	{'id':3, 'name':'Wipe', 'description':'Switches between primary and secondary, switching LEDs one by one, start to end'},
 	{'id':9, 'name':'Rainbow Wave', 'description':'Rainbow wave along the whole strip'},
 	{'id':87, 'name':'Rainbow Twinkle', 'description':'Rainbow animation moving down the strip with white twinkles'},

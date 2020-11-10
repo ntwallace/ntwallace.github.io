@@ -54,7 +54,7 @@ function onDeviceConnected() {
     document.getElementById('footer').style.opacity = 1;
     document.getElementById('footer').style.pointerEvents = "auto";
 
-    document.getElementById('modeSelect').selectedIndex = bleGetOpMode() - 1;
+    bleGetOpMode();
 
     btConnected = true;
 }
@@ -90,9 +90,11 @@ async function bleGetOpMode() {
         const value  = await characteristic.readValue();
         const opMode = value.getUint8(0) - 48;
 
-        //console.log('Op Mode on Brightly is ' + opMode);
+        console.log('Op Mode on Brightly is ' + opMode);
 
-        return opMode;
+        document.getElementById('modeSelect').selectedIndex = opMode;
+
+        //return opMode;
 
     } catch(error) {
         console.log('Error reading Op Mode from Brightly. Error: ' + error);
@@ -152,7 +154,7 @@ async function bleSetMasterVals(type, val) {
   }
 }
 
-async function bleSetRgbVals(rgbString, colorSlot) {
+async function bleSetRgbVals(rgbString, colorSlot, output) {
     try {
         // console.log('Getting RGB Service...');
         // const service = await server.getPrimaryService(rgbService);
@@ -160,8 +162,8 @@ async function bleSetRgbVals(rgbString, colorSlot) {
         console.log('Connecting to RGB characteristic');
         const characteristic = await rgbService.getCharacteristic('2392fab3-b378-4d6e-a295-4e37a5e7e1ec');
 
-        console.log('Writing RGB value: ' + rgbString + ' to slot: ' + colorSlot);
-        val = colorSlot.toString() + rgbString;
+        console.log('Writing RGB value: ' + rgbString + ' to output: ' + output + ', slot ' + colorSlot);
+        val = colorSlot.toString() + rgbString + output.toString();
 
         const value  = await characteristic.writeValue(encoder.encode(val));
 
@@ -178,6 +180,7 @@ async function bleSetPattern(pattern, output) {
         console.log('Connecting to Pattern RGB characteristic');
         const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1eb');
 
+        if(pattern.length < 2) pattern = '0'+ pattern;
         console.log('Writing Pattern ' + pattern + ' to output ' + output);
         const value  = await characteristic.writeValue(encoder.encode(pattern + output));
 
