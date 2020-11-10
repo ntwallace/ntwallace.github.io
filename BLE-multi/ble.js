@@ -8,7 +8,7 @@ let encoder = new TextEncoder('utf-8');
 
 const settingsServiceUUID = '7537fbd5-d66c-4b03-b132-47b1e18285ee';
 const masterServiceUUID = '2392fab3-b378-4d6e-a995-3e37a5e7e1da';
-const rgbServiceUUID = '2392fab3-b378-4d6e-a995-4e37a5e7e1db';
+const rgbServiceUUID = '2392fab3-b378-4d6e-a995-4e37a5e7e1da';
 const patternServiceUUID = '2392fab3-b378-4d6e-a995-5e37a5e7e1da';
 
 async function onBleConnect() {
