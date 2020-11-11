@@ -133,6 +133,38 @@ async function bleSetOutput(output) {
   }
 }
 
+async function bleGetColorSlot() {
+    try {
+
+        console.log('Connecting to color slot characteristic');
+        const characteristic = await settingsService.getCharacteristic('7537fbd5-d66c-4b03-b132-47b1e18281ec');
+
+        console.log('Color slot is: ' + output);
+
+        const value  = await characteristic.readValue();
+        var dec = new TextDecoder("utf-8");
+        const slot = dec.decode(value);
+
+    } catch(error) {
+        console.log('Error setting Op Mode. Error: ' + error);
+  }
+}
+
+async function bleSetColorSlot(slot) {
+    try {
+
+        console.log('Connecting to color slot characteristic');
+        const characteristic = await settingsService.getCharacteristic('7537fbd5-d66c-4b03-b132-47b1e18281ec');
+
+        console.log('Setting color slot to: ' + slot);
+
+        const value  = await characteristic.writeValue(encoder.encode(slot));
+
+    } catch(error) {
+        console.log('Error setting color slot. Error: ' + error);
+  }
+}
+
 async function bleSetMasterVals(type, val) {
     try {
         // console.log('Getting Master LED Service...');
@@ -175,7 +207,7 @@ async function bleSetRgbVals(rgbString, colorSlot, output) {
         // const service = await server.getPrimaryService(rgbService);
 
         console.log('Connecting to RGB characteristic');
-        const characteristic = await rgbService.getCharacteristic('2392fab3-b378-4d6e-a295-4e37a5e7e1ec');
+        const characteristic = await rgbService.getCharacteristic('2392fab3-b378-4d6e-a295-4e37a5e7e1ea');
 
         console.log('Writing RGB value: ' + rgbString + ' to output: ' + output + ', slot ' + colorSlot);
         val = colorSlot.toString() + rgbString + output.toString();
@@ -187,12 +219,28 @@ async function bleSetRgbVals(rgbString, colorSlot, output) {
   }
 }
 
+async function bleGetRgbVals(colorSlot) {
+    try {
+        console.log('Connecting to RGB characteristic');
+        const characteristic = await rgbService.getCharacteristic('2392fab3-b378-4d6e-a295-4e37a5e7e1ea');
+
+        const value  = await characteristic.readValue();
+        var dec = new TextDecoder("utf-8");
+        const color = dec.decode(value);
+
+        let rgb = [(color >> 16 & 0xFF), (color >> 8 & 0xFF), (color & 0xFF)];
+
+        setColorPicker(rgb);
+
+    } catch(error) {
+        console.log('Error getting RGB values. Error: ' + error);
+  }
+}
+
 async function bleSetPattern(pattern, output) {
     try {
-        // console.log('Getting Pattern Service...');
-        // const service = await server.getPrimaryService(patternService);
 
-        console.log('Connecting to Pattern RGB characteristic');
+        console.log('Connecting to Pattern characteristic');
         const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1eb');
 
         if(pattern.length < 2) pattern = '0'+ pattern;
@@ -200,7 +248,25 @@ async function bleSetPattern(pattern, output) {
         const value  = await characteristic.writeValue(encoder.encode(pattern + output));
 
     } catch(error) {
-        console.log('Error writing RGB values. Error: ' + error);
+        console.log('Error writing pattern values. Error: ' + error);
+  }
+}
+
+async function bleGetPattern(pattern, output) {
+    try {
+
+        console.log('Connecting to Pattern RGB characteristic');
+        const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1eb');
+
+        const value  = await characteristic.readValue();
+
+        var dec = new TextDecoder("utf-8");
+        const pattern = dec.decode(value);
+
+        document.getElementById('animationDropdown').value = pattern;
+
+    } catch(error) {
+        console.log('Error getting pattern values. Error: ' + error);
   }
 }
 
@@ -222,5 +288,24 @@ async function bleSetPatternConfig(pattern, speed, intensity, output) {
 
     } catch(error) {
         console.log('Error writing pattern config values. Error: ' + error);
+  }
+}
+
+async function bleGetSpeed() {
+    try {
+
+        console.log('Connecting to Pattern RGB characteristic');
+        const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1ea');
+
+        const value  = await characteristic.readValue();
+
+        var dec = new TextDecoder("utf-8");
+        const speed = dec.decode(value);
+
+        //console.log("Got speed " + speed);
+        document.getElementById('patternSpeed').value = speed;
+
+    } catch(error) {
+        console.log('Error getting speed values. Error: ' + error);
   }
 }

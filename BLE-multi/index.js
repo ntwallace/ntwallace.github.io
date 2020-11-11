@@ -10,9 +10,6 @@ const primaryColor = '#FF0000';
 const secondaryColor = '#FFF';
 let changeColor = true;
 
-let lastPrimaryColor = [primaryColor, primaryColor, primaryColor, primaryColor, primaryColor, primaryColor, primaryColor, primaryColor];
-let lastSecondaryColor = [secondaryColor, secondaryColor, secondaryColor, secondaryColor, secondaryColor, secondaryColor, secondaryColor, secondaryColor];
-
 const hexToRgb = hex =>
   hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
              ,(m, r, g, b) => '#' + r + r + g + g + b + b)
@@ -25,7 +22,6 @@ colorPicker.on(['color:change'], function(color) {
   setRgbInputs(rgbArray);
 
   output = document.getElementById('outputSelect').value;
-  saveColorVals();
 
   	// pass to BLE
  	if(changeColor) {
@@ -49,20 +45,20 @@ function onColorSlot(e) {
 	if(e.id == 'secondaryColor') {
 		colorSlot = 1;
 		if(!allOutputs) {
-			lastPrimaryColor[output - 1] = colorPicker.color.hexString;
-			colorPicker.color.hexString = lastSecondaryColor[output - 1];
+			bleSetColorSlot(colorSlot);
+			bleGetRgbVals();
 		} else {
-			colorPicker.color.hexString = lastSecondaryColor[0];
+			colorPicker.color.hexString = secondaryColor;
 		}
 		document.getElementById('primaryColor').style.background = '#666';
 		document.getElementById('primaryColor').style.color = '#eee';
 	} else {
 		colorSlot = 0;
 		if(!allOutputs) {
-			lastSecondaryColor[output - 1] = colorPicker.color.hexString;
-			colorPicker.color.hexString = lastPrimaryColor[output - 1];
+			bleSetColorSlot(colorSlot);
+			bleGetRgbVals();
 		} else {
-			colorPicker.color.hexString = lastPrimaryColor[0];
+			colorPicker.color.hexString = primaryColor;
 		}
 		document.getElementById('secondaryColor').style.background = '#666';
 		document.getElementById('secondaryColor').style.color = '#eee';
@@ -129,7 +125,6 @@ function setColorPicker(rgbArray) {
  	}
 
  	setColorPicker(rgbArray);
- 	//saveColorVals();
 
  	// pass to BLE
  	rgbString = getRgbString(rgbArray);
@@ -225,13 +220,14 @@ function onOutputSelect(val) {
 
 	if(val == 0) val += 1;
 
-	if(btConnected) bleSetOutput(val);
-
-	if(colorSlot == 0) {
-		colorPicker.color.hexString = lastPrimaryColor[val - 1];
-	} else {
-		colorPicker.color.hexString = lastSecondaryColor[val - 1];
+	if(btConnected) {
+		bleSetOutput(val);
+		bleGetRgbVals(colorSlot);
+		bleGetPattern();
+		bleGetSpeed();
 	}
+
+
 
 }
 
