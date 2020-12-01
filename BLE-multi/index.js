@@ -175,6 +175,24 @@ function onPatternSlider() {
 	if(btConnected) bleSetPatternConfig(pattern, speed, intensity, output);
 }
 
+function onSpeedSlider(val) {
+	output = document.getElementById('outputSelect').value;
+	speed = val;
+
+	console.log('Setting output ' + output + ' speed to ' + speed + '%');
+
+	if(btConnected) bleSetPatternSpeed(speed, output);	
+}
+
+function onIntensitySlider(val) {
+	output = document.getElementById('outputSelect').value;
+	intensity = val;
+
+	console.log('Setting output ' + output + ' intensity to ' + intensity + '%');
+
+	if(btConnected) bleSetPatternIntensity(intensity, output);	
+}
+
  function onPowerSwitch(power) {
  	if(!power){  // blackout
  		// dim settings
@@ -225,6 +243,7 @@ function onOutputSelect(val) {
 		bleGetRgbVals(colorSlot);
 		bleGetPattern();
 		bleGetSpeed();
+		bleGetIntensity();
 	}
 
 

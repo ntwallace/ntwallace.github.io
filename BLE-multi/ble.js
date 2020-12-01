@@ -15,7 +15,7 @@ async function onBleConnect() {
     try {
         console.log('Requesting list of Bluetooth device...');
         const device = await navigator.bluetooth.requestDevice({
-            filters: [{name: ['BRIGHTLY']}],
+            filters: [{namePrefix: ['BRIGHTLY']}],
             optionalServices: [settingsServiceUUID,
                                 masterServiceUUID, 
                                 rgbServiceUUID,
@@ -45,7 +45,7 @@ async function onBleConnect() {
 }
 
 function onDeviceConnected() {
-	console.log('Device connected');
+    console.log('Device connected');
     document.getElementById('connectDiv').style.display='none';
     //document.getElementById('connectedText').textContent = 'Connected to Brightly!';
 
@@ -60,10 +60,10 @@ function onDeviceConnected() {
 }
 
 function onDeviceDisconnected(){
-	console.log('Device disconnected');
-	resetPage();
+    console.log('Device disconnected');
+    resetPage();
 
-	document.getElementById('connectDiv').style.display='flex';
+    document.getElementById('connectDiv').style.display='flex';
     //document.getElementById('connectedText').textContent = 'Not connected';
 
     document.getElementById('main').style.opacity = .2;
@@ -75,11 +75,11 @@ function onDeviceDisconnected(){
 }
 
 function resetPage(){
-	rgbArray = [255, 0, 0];
-	setRgbInputs(rgbArray);
-	setColorPicker(rgbArray);
+    rgbArray = [255, 0, 0];
+    setRgbInputs(rgbArray);
+    setColorPicker(rgbArray);
 
-	document.getElementById('animationDropdown').value = 0;
+    document.getElementById('animationDropdown').value = 0;
 }
 
 async function bleGetOpMode() {
@@ -291,10 +291,50 @@ async function bleSetPatternConfig(pattern, speed, intensity, output) {
   }
 }
 
+async function bleSetPatternSpeed(speed, output) {
+    try {
+
+        if(speed.toString().length < 2) {
+            val = encoder.encode('0' + speed.toString() + output.toString());
+        } else {
+            val = encoder.encode(speed.toString() + output.toString());
+        }
+
+        console.log('Connecting to pattern speed characteristic');
+        const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1ea');
+
+        //console.log('Writing Speed ' + speed + '%');
+        const value  = await characteristic.writeValue(val);
+
+    } catch(error) {
+        console.log('Error writing pattern speed values. Error: ' + error);
+  }
+}
+
+async function bleSetPatternIntensity(intensity, output) {
+    try {
+
+        if(intensity.toString().length < 2) {
+            val = encoder.encode('0' + intensity.toString() + output.toString());
+        } else {
+            val = encoder.encode(intensity.toString() + output.toString());
+        }
+
+        console.log('Connecting to Pattern intensity characteristic');
+        const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1ed');
+
+        //console.log('Writing Speed ' + speed + '%');
+        const value  = await characteristic.writeValue(val);
+
+    } catch(error) {
+        console.log('Error writing pattern intensity values. Error: ' + error);
+  }
+}
+
 async function bleGetSpeed() {
     try {
 
-        console.log('Connecting to Pattern RGB characteristic');
+        console.log('Connecting to pattern speed characteristic');
         const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1ea');
 
         const value  = await characteristic.readValue();
@@ -302,10 +342,29 @@ async function bleGetSpeed() {
         var dec = new TextDecoder("utf-8");
         const speed = dec.decode(value);
 
-        //console.log("Got speed " + speed);
+        console.log("Got speed: " + speed);
         document.getElementById('patternSpeed').value = speed;
 
     } catch(error) {
         console.log('Error getting speed values. Error: ' + error);
+  }
+}
+
+async function bleGetIntensity() {
+    try {
+
+        console.log('Connecting to pattern intensity characteristic');
+        const characteristic = await patternService.getCharacteristic('2392fab3-b378-4d6e-a395-5e37a5e7e1eb');
+
+        const value  = await characteristic.readValue();
+
+        var dec = new TextDecoder("utf-8");
+        const intensity = dec.decode(value);
+
+        console.log("Got intensity: " + intensity);
+        document.getElementById('patternIntensity').value = intensity;
+
+    } catch(error) {
+        console.log('Error getting intensity values. Error: ' + error);
   }
 }
