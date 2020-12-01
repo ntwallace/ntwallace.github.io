@@ -67,11 +67,6 @@ header {
 	margin-top: 2.5vh;
 }
 
-.under {
-
-}
-
-
 #connectedText {
 	font-size: 24px;
 	color: #eee;
@@ -83,14 +78,6 @@ header {
 	margin: 20px 20px;
 }
 
-.colors {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-}
-
-.colorPicker {
-
-}
 
 #picker {
 	display: flex;
@@ -102,9 +89,6 @@ header {
 	grid-template-columns: repeat(2, 1fr);
 
 	margin-top: 4%;
-}
-
-.colorSlotButton {
 }
 
 .colorSlot button {

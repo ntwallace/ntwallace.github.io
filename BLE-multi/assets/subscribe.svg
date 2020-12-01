@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="197px" height="197px" viewBox="0 0 197 197" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 9</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Landingpage" transform="translate(-1671.000000, -63.000000)">
+            <g id="Group-9" transform="translate(1671.000000, 63.000000)">
+                <circle id="Oval" fill="#D8D8D8" cx="98.5" cy="98.5" r="98.5"></circle>
+                <g id="Group-8" transform="translate(9.000000, 9.000000)">
+                    <ellipse id="Oval" cx="88.6074514" cy="88.9875" rx="88.6074514" ry="88.65"></ellipse>
+                    <text id="Join-our-mailing-lis" font-family="GTFlexa-Regular, GT Flexa" font-size="16.2" font-weight="normal" line-spacing="45" fill="#3D3A40">
+                        <tspan x="0.694384449" y="87.1">Join our mailing list today 	 and 	stay updated with the latest news</tspan>
+                    </text>
+                </g>
+                <text id="Subscribe" font-family="GTFlexa-Regular, GT Flexa" font-size="18" font-weight="normal" line-spacing="50" fill="#3D3A40">
+                    <tspan x="56" y="89">Subscribe</tspan>
+                </text>
+                <text id="Subscribe" font-family="GTFlexa-Regular, GT Flexa" font-size="18" font-weight="normal" line-spacing="50" fill="#3D3A40">
+                    <tspan x="56" y="89">Subscribe</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

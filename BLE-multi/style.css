@@ -1,0 +1,118 @@
+/* GT Flexa Mono */
+
+@font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Lazer.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Lazer-Italic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Thin.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Thin-Italic.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Light-Italic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Regular-Italic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Medium-Italic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Bold-Italic.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexaMono';
+    src:  url('assets/fonts/GT-Flexa-Mono-Black-Italic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'GTFlexa';
+    src:  url('assets/fonts/GT-Flexa-Standard-Bold.woff') format('woff');
+    font-weight: 700;
+  }
+  
+  .font-mono {
+    font-family: 'GTFlexaMono' !important;
+  }
+  
+  * {
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+  
+  body {
+    background-color: #333036;
+  }

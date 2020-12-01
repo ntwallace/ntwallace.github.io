@@ -3,28 +3,29 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Brightly - LED Controller</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="index.css">
 		<link rel="stylesheet" href="common.css">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="tailwind.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 		<script src='index.js'></script>
 		<script src='ble.js'></script>
 	</head>
 
-	<body>
-		<div class='container'>
-			<header class='header'>
-				<span class='settings'>
-					<div id='modeDiv'>Mode: 
-						<select id='modeSelect' onchange='onModeSelect(this.value)'>
-							<option value=0>Network</option>
-							<option value=1>Pattern</option>
-							<option value=2>Player</option>			
-						</select>
-					</div>
-					<div id='outputDiv'>Output: 
-						<select id='outputSelect' onchange='onOutputSelect(this.value)'>
+	<body class="font-mono min-h-screen	p-0 m-0">
+		<div class='w-full min-h-screen	flex flex-col'>
+			<header class='header flex flex-col  flex-grow-0 pb-16 pt-6 relative'>
+				<span class="w-full flex flex-col content-around text-center">
+					<h1 class="text-5xl -mb-3">
+						brightly
+					</h1>
+					<span class="text-base -ml-24">by Polytronic</span>
+				</span>
+				
+				<span class='w-full flex flex-col content-around text-center md:text-left md:absolute mx-0 my-6 md:my-2 md:mx-8'>
+					<span id='outputDiv' class=''>Output: 
+						<select class='px-2 py-2' id='outputSelect'  onchange='onOutputSelect(this.value)'>
 							<option value=0>All</option>
 							<option value=1>1</option>
 							<option value=2>2</option>
@@ -35,34 +36,33 @@
 							<option value=7>7</option>						
 							<option value=8>8</option>						
 						</select>
-					</div>
-				</span>
-				<span>
-					<h1>
-						brightly
-						<div class="tagline">by Polytronic</div>
-					</h1>
-				</span>
-				<span></span>
-				<!-- <div id='connectedText'>not connected</div> -->
-				
+					</span>
+					<span id='modeDiv' class='mt-4'>Mode: 
+						<select class='px-2 py-2' id='modeSelect' onchange='onModeSelect(this.value)'>
+							<option value=0>Network</option>
+							<option value=1>Pattern</option>
+							<option value=2>Player</option>			
+						</select>
+					</span>
+				</span>				
 			</header>
-			<main class='content' id='main'>
-				<div class ='controls' id='controls'>
-					<div class='colors'>
-						<div class='colorPicker'>
+
+			<main class='content container mx-auto flex-1 flex-grow flex-grow-1' id='main'>
+				<div class ='' id='controls'>
+					<div class='w-full flex flex-col md:flex-row items-center px-0 md:px-36'>
+						<div class='colorPicker w-full md:w-1/2 mb-20 md:mb-0'>
 							<div id="picker"></div>
 							<div id='colorSlot' class='colorSlot'>
 								<div id='slot1' class='colorSlotButton'>
-									<button id='primaryColor' onclick='onColorSlot(this)'>Primary</button>
+									<button class='px-3 py-2 rounded-xl' id='primaryColor' onclick='onColorSlot(this)'>Primary</button>
 								</div>
 								<div id='slot2' class='colorSlotButton'>
-									<button id='secondaryColor' onclick='onColorSlot(this)'>Secondary</button>
+									<button class='px-3 py-2 rounded-xl' id='secondaryColor' onclick='onColorSlot(this)'>Secondary</button>
 								</div>
 							</div>
 						</div>
 
-						<div id='colorView' class='colorView'>
+						<div id='colorView' class='colorView w-full md:w-1/2'>
 								<div class='swatches top'>
 									<button class='color white' data-value='#ffffff' onclick='onColorButtonClick(this)'></button>
 									<button class='color red' data-value='#ff0000' onclick='onColorButtonClick(this)'></button>
@@ -101,69 +101,71 @@
 								</div>
 						</div>
 					</div>
-					<div class='patterns'>
-						<div id='patternDropdown'>
+					
+					<div class='mt-16 w-full flex flex-col md:flex-row items-center px-0 md:px-36'>
+						<div id='patternDropdown' class='w-full md:w-1/2'>
 							<center>
-								<select id='animationDropdown' onchange='onAnimationDropdown(this.value)'></select>
+								<select id='animationDropdown' class="px-3 py-2" onchange='onAnimationDropdown(this.value)'></select>
 								<script>
 								animations.forEach(e => animationDropdown.innerHTML += `<option value=${e.id}>${e.name}</option>`);
 							</script>
 								</center>
+								<div id='patternDescription' class='text-xs pt-2'>Solid primary color on all LEDs</div>
 						</div>
-						<div id='patternDescription'>Solid primary color on all LEDs</div>
-						<div class ='slider' id='patternSpeedDiv'> Speed: 
-							<input type="range" min="1" max="99" value="50" class="slider" id="patternSpeed" oninput='onPatternSlider()'>
-						</div>
-						<div class ='slider' id='patternIntensityDiv'> Effect: 
-							<input type="range" min="1" max="99" value="50" class="slider" id="patternIntensity" oninput='onPatternSlider()'>
+						<div class="w-full md:w-1/2 flex flex-col md:flex-row px-8 md:px-0 pt-8 md:pt-0">
+							<div class ='slider flex w-full md:w-1/2' id='patternSpeedDiv'> Speed: 
+								<input type="range" min="1" max="99" value="50" class="slider flex-1 pl-3 pr-6" id="patternSpeed" oninput='onPatternSlider()'>
+							</div>
+							<div class ='slider flex w-full md:w-1/2' id='patternIntensityDiv'> Effect: 
+								<input type="range" min="1" max="99" value="50" class="slider flex-1 pl-3 pr-6" id="patternIntensity" oninput='onPatternSlider()'>
+							</div>
 						</div>
 					</div>
 					<div class='bottom'></div>
 				</div>
+
 				<div class='under' id='under'>
 				</div>
 			</main>
-			<footer class='footer' id='footer'>
-				<div class='masterText'>
-					<div id='blackoutText'>Power</div>
-					<div class='masterTextContainer'>
-						<div id='brightnessText'>Brightness</div>
-						<div id='brightnessPct'>(13%)</div>
-					</div>
-					<div class='masterTextContainer'>
-						<div id='temperatureText'>Temperature</div>
-						<div id='temperatureK'>(4250K)</div>
-					</div>
-				</div>
-
-				<div class='master'>
-					<div class='switch' id='blackout'>
-						<label class="switch">
-						  <input type="checkbox" checked id='checkboxBlackout' onchange='onPowerSwitch(this.checked)'>
-						  <span class="slider" id='sliderBlackout'></span>
-						</label>
-						<br />
-					</div>
-
-					<div class ='slider' id='brightness'>
-						<input type="range" min="1" max="100" value="13" class="slider" id="brightnessSlider" oninput='onBrightnessSlider(this.value)'>
-					</div>
-
-					<div class ='slider' id='temperature'> 
-						<input type="range" min="2500" max="10000" value="4250" class="slider" id="temperatureSlider" oninput='onTemperatureSlider(this.value)'>
-					</div>
+			
+			<footer class='footer mt-16 flex-grow-0 pb-12 md:pb-0' id='footer'>
+				<div class="container mx-auto w-full flex text-center flex-col md:flex-row">
+					<span class="w-full md:w-1/3 py-4 md:py-8">
+						<div class='switch' id='blackout'>
+							<label class="switch">
+								<input type="checkbox" class="h-10" checked id='checkboxBlackout' onchange='onPowerSwitch(this.checked)'>
+								<span class="slider" id='sliderBlackout'></span>
+							</label>
+						</div>
+						<div id='blackoutText'>Power</div>
+					</span>
+					<span class="w-full md:w-1/3 py-4 md:py-8">
+						<div class ='slider pb-6' id='brightness'>
+							<input type="range" min="1" max="100" value="13" class="slider w-full px-6 md:px-12" id="brightnessSlider" oninput='onBrightnessSlider(this.value)'>
+						</div>
+						<span id='brightnessText'>Brightness</span>
+						<span id='brightnessPct'>(13%)</span>
+					</span>
+					<span class="w-full md:w-1/3 py-4 md:py-8">
+						<div class ='slider pb-6' id='temperature'> 
+							<input type="range" min="2500" max="10000" value="4250" class="slider w-full px-6 md:px-12" id="temperatureSlider" oninput='onTemperatureSlider(this.value)'>
+						</div>
+						<span id='temperatureText'>Temperature</span>
+						<span id='temperatureK'>(4250K)</span>
+					</span>
+					
 				</div>
 			</footer>
 			<div class='connect' id='connectDiv'>
-				<h1>
+				<span class="h1">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 136"><path d="M55.48,33.58,66.69,44.82,55.49,56.06V33.58Zm0,68.83L66.69,91.17,55.49,79.93v22.48ZM43.51,68,19.28,43.63l7-7.05L45.61,56V9.53l35.1,35.21L57.53,68,80.72,91.25,45.61,126.47V80L26.3,99.42l-7-7L43.51,68ZM50,136c29.6,0,50-14.11,50-68S79.6,0,50,0,0,14.11,0,68s20.4,68,50,68Z"/></svg>
-					&nbsp; Brightly
-				</h1>
+					&nbsp; <div class="inline text-4xl font-bold">Brightly</div>
+				</span>
 				<p>
-					To use this demo, connect to a Brightly device!
+					To use this demo, <br>connect to a Brightly device!
 				</p>
 
-				<button id='connect' onclick='onBleConnect()'>Connect</button>
+				<button id='connect' class="rounded-xl" onclick='onBleConnect()'>Connect</button>
 			</div>
 		</div>
 	</body>

@@ -1,11 +1,3 @@
-:root {
-    font-size: 0.5em;
-}
-
-* {
-	font-family: 'Noto Sans', sans-serif !important;
-}
-
 .tagline {
 	transform: translateY(-20px) translateX(7px);
 	font-size: 12pt;
@@ -16,8 +8,7 @@
 .connect {
 	position: absolute;
 	top: 0;
-	left: 5rem;
-    width: 30rem;
+	left: 2rem;
     z-index: 100;
 
 	box-sizing: border-box;
@@ -28,7 +19,6 @@
 	border-bottom-right-radius: 2rem;
 
 	color: #000;
-	font-size: 1.6rem;
 	line-height: 140%;
 	text-align: left;
 
@@ -42,17 +32,17 @@ body.connected .connect {
 	transform: translateY(-50rem);
 	pointer-events: none;
 }
-.connect h1 {
+.connect .h1 {
+	display: inline;
 	color: #000;
-	font-size: 4rem;
-	font-weight: bold;
 	text-transform: lowercase;
 	margin-bottom: 2rem;
 }
-.connect h1 em {
+.connect .h1 em {
 	color: #aaa;
 }
-.connect h1 svg {
+.connect svg {
+	display: inline;
     position: relative;
 	top: -1rem;
 	width: 5rem;
@@ -66,15 +56,12 @@ body.connected .connect {
 
 	margin: 3rem 0 2rem;
 	padding: 1rem 2rem;
-	font-size: 3rem;
 	text-transform: lowercase;
 }
 .connect a {
 	color: #367ebd;
 	cursor: pointer;
 }
-
-
 
 
 /* Checkbox */
@@ -120,13 +107,12 @@ input[type=checkbox]::after {
 	
 	transition: all .3s ease-in-out;
 }
+
 input[type=checkbox]:checked::after {
 	transform: translateX(1.8vh);
     background: #367ebd;
 }
 
-
 label {
-	font-size: 2vh;
 	color: #ddd;
 }
