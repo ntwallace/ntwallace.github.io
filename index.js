@@ -153,7 +153,6 @@ function setColorPicker(rgbArray) {
 function onAnimationDropdown(val) {
 	let description = animations.find(o => o.id == val).description;
 	document.getElementById('patternDescription').textContent = description;
- 	//document.getElementById('patternGif').innerHTML = '<img src=' + gifLink + val + gifFooter + ' alt />';
 
  	output = document.getElementById('outputSelect').value;
 
@@ -259,9 +258,6 @@ function zeroPad(num, numZeros) {
 
     return zeroString+n;
 }
-
-// const gifLink = 'https://github.com/photocromax/WLED-live-visualizations/raw/master/GIF/FX_';
-// const gifFooter = '.gif';
 
 const animations = [
 	{'id':0, 'name':'Solid', 'description':'Solid primary color on all LEDs'},

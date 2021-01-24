@@ -16,7 +16,7 @@ async function onBleConnect() {
         console.log('Requesting list of Bluetooth device...');
         const device = await navigator.bluetooth.requestDevice({
             filters: [{namePrefix: ['BRIGHTLY']}],
-            acceptAllDevices: true,
+            //acceptAllDevices: true,
             optionalServices: [settingsServiceUUID,
                                 masterServiceUUID, 
                                 rgbServiceUUID,
