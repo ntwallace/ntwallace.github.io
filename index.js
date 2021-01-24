@@ -70,8 +70,6 @@ function saveColorVals() {
 	console.log('Saving color values on output ' + output + ', color slot ' + colorSlot);
 	if(output == 0) output += 1;
 
-
-
 	if(colorSlot = 0) {
 		lastPrimaryColor[output - 1] = colorPicker.color.hexString;
 	} else {
@@ -262,12 +260,11 @@ function zeroPad(num, numZeros) {
     return zeroString+n;
 }
 
-const gifLink = 'https://github.com/photocromax/WLED-live-visualizations/raw/master/GIF/FX_';
-const gifFooter = '.gif';
+// const gifLink = 'https://github.com/photocromax/WLED-live-visualizations/raw/master/GIF/FX_';
+// const gifFooter = '.gif';
 
 const animations = [
 	{'id':0, 'name':'Solid', 'description':'Solid primary color on all LEDs'},
-	{'id':1, 'name':'Blink', 'description':'Blinks between primary and secondary color'},
 	{'id':12, 'name':'Breathe', 'description':'Fades between primary and secondary color'},
 	{'id':3, 'name':'Wipe', 'description':'Switches between primary and secondary, switching LEDs one by one, start to end'},
 	{'id':9, 'name':'Rainbow Wave', 'description':'Rainbow wave along the whole strip'},
@@ -276,8 +273,6 @@ const animations = [
 	{'id':13, 'name':'Theater', 'description':'Pattern of one lit and two unlit LEDs running'},
 	{'id':28, 'name':'Chase', 'description':'2 LEDs in primary color running on secondary'},
 	{'id':89, 'name':'Fireworks', 'description':'Exploding multicolor fireworks'},
-	{'id':93, 'name':'Running Trail', 'description':'Moving dots with trail'},
-	
 ];
 
 
