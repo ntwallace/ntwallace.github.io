@@ -56,6 +56,10 @@ function onDeviceConnected() {
     document.getElementById('footer').style.pointerEvents = "auto";
 
     bleGetOpMode();
+    bleGetPattern();
+    bleGetSpeed();
+    bleGetRgbVals();
+    bleGetIntensity();
 
     btConnected = true;
 }
@@ -89,7 +93,7 @@ async function bleGetOpMode() {
         const characteristic = await settingsService.getCharacteristic('7537fbd5-d66c-4b03-b132-47b1e18281ea');
 
         const value  = await characteristic.readValue();
-        const opMode = value.getUint8(0) - 48;
+        const opMode = value.getUint8(0) - 49;
 
         console.log('Op Mode on Brightly is ' + opMode);
 
@@ -261,8 +265,8 @@ async function bleGetPattern(pattern, output) {
 
         const value  = await characteristic.readValue();
 
-        var dec = new TextDecoder("utf-8");
-        const pattern = dec.decode(value);
+        const pattern = value.getUint8() - 48;
+        console.log("pattern received = " + pattern);
 
         document.getElementById('animationDropdown').value = pattern;
 
