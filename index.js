@@ -16,7 +16,7 @@ const debounce = (callback, debounceTime) => {
       clearTimeout(timer)
       timer = setTimeout(() => {
         callback(...args)
-      }, wait)
+      }, debounceTime)
     }
 }
 
