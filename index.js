@@ -10,6 +10,16 @@ const primaryColor = '#FF0000';
 const secondaryColor = '#FFF';
 let changeColor = true;
 
+const debounce = (callback, debounceTime) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        callback(...args)
+      }, debounceTime)
+    }
+}
+
 const hexToRgb = hex =>
   hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
              ,(m, r, g, b) => '#' + r + r + g + g + b + b)
@@ -17,20 +27,22 @@ const hexToRgb = hex =>
     .map(x => parseInt(x, 16))
 
 
-colorPicker.on(['color:change'], function(color) {
-  rgbArray = Object.values(color.rgb);
-  setRgbInputs(rgbArray);
+function handler(color) {
+	rgbArray = Object.values(color.rgb);
+	setRgbInputs(rgbArray);
+	
+	output = document.getElementById('outputSelect').value;
+	
+	// pass to BLE
+	if(changeColor) {
+		rgbString = getRgbString(rgbArray);
+		if(btConnected)  bleSetRgbVals(rgbString, colorSlot, output);
+	} else {
+		changeColor = true;
+	}
+}
 
-  output = document.getElementById('outputSelect').value;
-
-  	// pass to BLE
- 	if(changeColor) {
- 		rgbString = getRgbString(rgbArray);
- 		if(btConnected)  bleSetRgbVals(rgbString, colorSlot, output);
- 	} else {
- 		changeColor = true;
- 	}
-});
+colorPicker.on(['color:change'], debounce(handler, 150));
 
 function onColorSlot(e) {
 	e.style.background = '#eee';
