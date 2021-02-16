@@ -16,7 +16,7 @@ const debounce = (callback, debounceTime) => {
       clearTimeout(timer)
       timer = setTimeout(() => {
         callback(...args)
-      }, debounceTime)
+      }, wait)
     }
 }
 
@@ -28,21 +28,21 @@ const hexToRgb = hex =>
 
 
 function handler(color) {
-	rgbArray = Object.values(color.rgb);
-	setRgbInputs(rgbArray);
-	
-	output = document.getElementById('outputSelect').value;
-	
-	// pass to BLE
-	if(changeColor) {
-		rgbString = getRgbString(rgbArray);
-		if(btConnected)  bleSetRgbVals(rgbString, colorSlot, output);
-	} else {
-		changeColor = true;
-	}
+    rgbArray = Object.values(color.rgb);
+    setRgbInputs(rgbArray);
+  
+    output = document.getElementById('outputSelect').value;
+  
+        // pass to BLE
+       if(changeColor) {
+           rgbString = getRgbString(rgbArray);
+           if(btConnected)  bleSetRgbVals(rgbString, colorSlot, output);
+       } else {
+           changeColor = true;
+       }
 }
 
-colorPicker.on(['color:change'], debounce(handler, 150));
+colorPicker.on(['color:change'], debounce(handler, 350));
 
 function onColorSlot(e) {
 	e.style.background = '#eee';
